@@ -1,0 +1,95 @@
+JFDML JFormDesigner: "8.0.3.0.246" Java: "17.0.3" encoding: "UTF-8"
+
+new FormModel {
+	"i18n.bundlePackage": "i18n"
+	"i18n.bundleName": "strings"
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+			name: "this"
+			"minimumSize": new java.awt.Dimension( 400, 400 )
+			"preferredSize": new java.awt.Dimension( 1024, 768 )
+			"defaultCloseOperation": 3
+			"title": "Provetta cispella"
+			"$locationPolicy": 1
+			add( new FormContainer( "javax.swing.JToolBar", new FormLayoutManager( class javax.swing.JToolBar ) ) {
+				name: "infoBar"
+				add( new FormComponent( "it.netsnap.laser.JCircle" ) {
+					name: "ledSerial"
+					"maximumSize": new java.awt.Dimension( 20, 20 )
+					"color": sfield java.awt.Color lightGray
+					"radius": 13
+					"minimumSize": new java.awt.Dimension( 20, 20 )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblSerial"
+					"text": new FormMessage( null, "lblSerial.text" )
+					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"componentPopupMenu": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"border": new javax.swing.border.EmptyBorder( 2, 10, 2, 10 )
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "lblSerialMouseClicked", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblStatus"
+					"text": "text"
+					"border": new javax.swing.border.EmptyBorder( 2, 10, 2, 10 )
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "South"
+			} )
+			add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
+				name: "tabs"
+				"border": new javax.swing.border.BevelBorder( 1, null, null, null, null )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "Center"
+			} )
+			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
+				name: "menuBar1"
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "menu1"
+					"text": "File"
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem1"
+						"text": "Open"
+					} )
+				} )
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 10 )
+			"size": new java.awt.Dimension( 480, 470 )
+		} )
+		add( new FormContainer( "javax.swing.JPopupMenu", new FormLayoutManager( class javax.swing.JPopupMenu ) ) {
+			name: "menuSelectSerial"
+			add( new FormComponent( "javax.swing.JMenuItem" ) {
+				name: "menuDisconnect"
+				"text": new FormMessage( null, "menuDisconnect.text" )
+				"enabled": false
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuDisconnectClick", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JMenuItem" ) {
+				name: "menuConnect"
+				"text": new FormMessage( null, "menuConnect.text" )
+				"enabled": false
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuConnectClick", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JPopupMenu$Separator" ) {
+				name: "separator1"
+			} )
+			add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+				name: "menuDevices"
+				"text": new FormMessage( null, "menuDevices.text" )
+				add( new FormComponent( "javax.swing.JMenuItem" ) {
+					name: "menuRefreshDevices"
+					"text": new FormMessage( null, "menuRefreshDevices.text" )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuRefreshDevicesClick", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JPopupMenu$Separator" ) {
+					name: "separator2"
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 345, 550 )
+			"size": new java.awt.Dimension( 150, 150 )
+		} )
+	}
+}

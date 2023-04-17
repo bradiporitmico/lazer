@@ -1,0 +1,23 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"java.project.sourcePaths": [
+			"test-app/src/main/java/it/netsnap/laser"
+		],
+		"java.test.config": {
+			"vmArgs": [
+        "-d /dev/ttyUSB1"
+			]
+		},
+		"maven.view": "hierarchical",
+		"java.configuration.updateBuildConfiguration": "automatic",
+		"editor.codeActionsOnSave": {
+
+
+		}
+	}
+}

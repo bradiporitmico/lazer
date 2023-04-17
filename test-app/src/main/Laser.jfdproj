@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <entry key="classpath1" value="java" />
+  <entry key="classpath2" value="../../target/classes" />
+  <entry key="sourcefolders1" value="java/test-app/src/main/java" />
+  <entry key="sourcefolders2" value="resources" />
+</project>

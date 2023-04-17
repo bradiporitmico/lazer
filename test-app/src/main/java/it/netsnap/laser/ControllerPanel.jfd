@@ -1,0 +1,16 @@
+JFDML JFormDesigner: "8.0.3.0.246" Java: "17.0.3" encoding: "UTF-8"
+
+new FormModel {
+	"i18n.bundlePackage": "i18n"
+	"i18n.bundleName": "strings"
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+			name: "this"
+			"name": new FormMessage( null, "controllerpanel.name" )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 750, 460 )
+		} )
+	}
+}

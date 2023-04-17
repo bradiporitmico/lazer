@@ -1,0 +1,183 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>it.netsnap.laser</groupId>
+	<artifactId>test-app</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0</version>
+
+	<name>test-app</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
+		<main.class>it.netsnap.laser.App</main.class>
+		<flatlafVersion>3.1</flatlafVersion>
+	</properties>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.mod4j.org.apache.commons</groupId>
+			<artifactId>cli</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.java.jinput</groupId>
+			<artifactId>jinput</artifactId>
+			<version>2.0.9</version>
+		</dependency>
+		<dependency>
+			<groupId>net.java.jinput</groupId>
+			<artifactId>jinput</artifactId>
+			<version>2.0.9</version>
+			<classifier>natives-all</classifier>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/info.clearthought/table-layout -->
+		<dependency>
+			<groupId>info.clearthought</groupId>
+			<artifactId>table-layout</artifactId>
+			<version>4.2.1</version>
+		</dependency>
+
+
+
+		<dependency>
+			<groupId>com.fazecast</groupId>
+			<artifactId>jSerialComm</artifactId>
+			<version>2.9.3</version>
+		</dependency>
+
+
+
+		<!-- FLATLAF -->
+		<dependency>
+			<groupId>com.formdev</groupId>
+			<artifactId>flatlaf</artifactId>
+			<version>${flatlafVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.formdev</groupId>
+			<artifactId>flatlaf</artifactId>
+			<version>${flatlafVersion}</version>
+			<classifier>linux-x86_64</classifier>
+			<type>so</type>
+		</dependency>
+		<dependency>
+			<groupId>com.formdev</groupId>
+			<artifactId>flatlaf</artifactId>
+			<version>${flatlafVersion}</version>
+			<classifier>windows-x86_64</classifier>
+			<type>dll</type>
+		</dependency>
+		<dependency>
+			<groupId>com.formdev</groupId>
+			<artifactId>flatlaf</artifactId>
+			<version>${flatlafVersion}</version>
+			<classifier>windows-x86</classifier>
+			<type>dll</type>
+		</dependency>
+
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>
+														${project.build.directory}/libs
+							</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.2.0</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>libs/</classpathPrefix>
+							<mainClass>${main.class}</mainClass>
+							<useUniqueVersions>false</useUniqueVersions>							<!-- important! -->
+						</manifest>
+						<manifestEntries>
+							<Class-Path>.</Class-Path>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<appendAssemblyId>false</appendAssemblyId>
+							<descriptors>
+								<descriptor>src/main/assembly/zip.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.2.1</version>
+				<configuration>
+					<mainClass>${main.class}</mainClass>
+					<arguments>
+						<argument>-d</argument>
+						<argument>/dev/ttyUSB1</argument>
+						<argument>-Djava.library.path=${project.build.directory}/natives</argument>
+					</arguments>
+				</configuration>
+			</plugin>
+
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M3</version>
+				<configuration>
+					<environmentVariables>
+						<LD_LIBRARY_PATH>${project.build.directory}/natives</LD_LIBRARY_PATH>
+					</environmentVariables>
+				</configuration>
+			</plugin>
+
+
+			<plugin>
+				<groupId>com.googlecode.mavennatives</groupId>
+				<artifactId>maven-nativedependencies-plugin</artifactId>
+			</plugin>
+		</plugins>
+
+	</build>
+</project>
